@@ -1,29 +1,13 @@
-# Lesson 1
+# Lesson 2
 
-This is the first and it's all about setting up your workspace
-
-First, clone this barebone repository
-
-After your git clone has finished, install your node.js dependencies
-
-```bash
-yarn
-```
-
-The project currently has a very simple setup with a simple web app in the dapp folder which we will explore later.
+In this lesson, we'll create a simple smart contract and assign a name and a symbol field
 
 ## Tasks
 
-Create a solidity starting application using Truffle
+1. Create a smart contract in the contracts section with the file name "Token.sol"
 
-1. First download the Truffle CLI
+2. Add the contract syntax and assign a string variable called "name", you can assign any value to this contract it will be the name of your Token
 
-```bash
-yarn global add truffle
-```
+3. create another string variable called "symbol" and assign a symbol to this field, this will generally be used as the ticker for your token
 
-2. Initialize with truffle
-
-```bash
-truffle init
-```
+4. create a simple unit test to read your name and check and confirm that they are indeed what you wrote
