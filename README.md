@@ -1,13 +1,18 @@
-# Lesson 2
+# Lesson 3
 
-In this lesson, we'll create a simple smart contract and assign a name and a symbol field
+Ok great! Now we can start doing some exciting stuff.
 
 ## Tasks
 
-1. Create a smart contract in the contracts section with the file name "Token.sol"
+1. Create a totalSupply field and add the total supply you want to provide to this token
 
-2. Add the contract syntax and assign a string variable called "name", you can assign any value to this contract it will be the name of your Token
+2. Create a decimals field to indicate how many decimals this token will have
 
-3. create another string variable called "symbol" and assign a symbol to this field, this will generally be used as the ticker for your token
+3. Create a balanceOf field which is a map of all the users and their balances
 
-4. create a simple unit test to read your name and check and confirm that they are indeed what you wrote
+4. Add a contructor to the Token contract and give the initial total supply to the user who deployed the contract
+
+5. Create unit tests to
+  - check that totalSupply is correct
+  - check decimals field is correct
+  - check the balanceOf of the deploy is correct
