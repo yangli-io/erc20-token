@@ -12,4 +12,13 @@ contract Token {
   constructor() public {
     balanceOf[msg.sender] = totalSupply;
   }
+
+  function transfer(address _to, uint256 _value) public returns (bool success) {
+      require(balanceOf[msg.sender] >= _value, "INSUFFICIENT_BALANCE");
+
+      balanceOf[msg.sender] -= _value;
+      balanceOf[_to] += _value;
+
+      return true;
+  }
 }

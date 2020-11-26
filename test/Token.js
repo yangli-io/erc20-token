@@ -34,4 +34,25 @@ contract('Token', function(accounts) {
 
     expect(balance.toString()).to.equal(totalBalance)
   })
+
+  it('should transfer 1000000 units of Token to the accounts[1]', async function() {
+    await this.token.transfer(accounts[1], '1000000', { from: accounts[0] });
+
+    const balanceAccountZero = await this.token.balanceOf(accounts[0]);
+    const balanceAccountOne = await this.token.balanceOf(accounts[1]);
+
+    expect(balanceAccountZero.toString()).to.equal('99999000000');
+    expect(balanceAccountOne.toString()).to.equal('1000000');
+  })
+
+  it('should not allow you to transfer more than you have', async function() {
+    let error;
+    try {
+      await this.token.transfer(accounts[0], '1000001', { from: accounts[1] });
+    } catch (e) {
+      error = e;
+    }
+    
+    expect(error.message).to.include('INSUFFICIENT_BALANCE')
+  })
 });
