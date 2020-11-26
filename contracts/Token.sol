@@ -8,17 +8,36 @@ contract Token {
   uint256 public decimals = 6;
 
   mapping(address => uint256) public balanceOf;
+  mapping(address => mapping(address => uint256)) public allowance;
   
   constructor() public {
     balanceOf[msg.sender] = totalSupply;
   }
 
   function transfer(address _to, uint256 _value) public returns (bool success) {
-      require(balanceOf[msg.sender] >= _value, "INSUFFICIENT_BALANCE");
+    require(balanceOf[msg.sender] >= _value, "INSUFFICIENT_BALANCE");
 
-      balanceOf[msg.sender] -= _value;
-      balanceOf[_to] += _value;
+    balanceOf[msg.sender] -= _value;
+    balanceOf[_to] += _value;
 
-      return true;
+    return true;
+  }
+
+  function approve(address _to, uint256 _value) public returns (bool success) {
+    allowance[msg.sender][_to] = _value;
+
+    return true;
+  }
+
+  function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+    require(balanceOf[_from] >= _value, "INSUFFICIENT_BALANCE");
+    require(allowance[_from][msg.sender] >= _value, "INSUFFICIENT_ALLOWANCE");
+
+    balanceOf[_from] -= _value;
+    balanceOf[_to] += _value;
+
+    allowance[_from][msg.sender] -= _value;
+
+    return true;
   }
 }

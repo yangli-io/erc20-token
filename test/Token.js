@@ -55,4 +55,39 @@ contract('Token', function(accounts) {
     
     expect(error.message).to.include('INSUFFICIENT_BALANCE')
   })
+
+  it('should approve 100000 units of allowance', async function() {
+    const allowance = await this.token.allowance(accounts[0], accounts[1]);
+
+    expect(allowance.toString()).to.equal('0');
+
+    await this.token.approve(accounts[1], '1000000', { from: accounts[0] });
+
+    const allowanceAfter = await this.token.allowance(accounts[0], accounts[1]);
+
+    expect(allowanceAfter.toString()).to.equal('1000000');
+  })
+
+  it('should not allow accounts[1] to transfer more than 1000000 of account[0]s balance', async function() {
+    let error;
+    try {
+      await this.token.transferFrom(accounts[0], accounts[2], '1000001', { from: accounts[1] });
+    } catch (e) {
+      error = e;
+    }
+    
+    expect(error.message).to.include('INSUFFICIENT_ALLOWANCE')
+  })
+
+  it('should be able to transfer 1000000 of accounts[0]s balance by accounts[1]', async function() {
+    await this.token.transferFrom(accounts[0], accounts[2], '1000000', { from: accounts[1] });
+
+    const balance = await this.token.balanceOf(accounts[2]);
+
+    expect(balance.toString()).to.equal('1000000');
+
+    const allowance = await this.token.allowance(accounts[0], accounts[1]);
+
+    expect(allowance.toString()).to.equal('0');
+  })
 });

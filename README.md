@@ -1,14 +1,12 @@
-# Lesson 4
+# Lesson 6
 
-Great! We just need to enable a transferFrom function and approve
+OK! you're pretty much done with the Token Contract, now we just need to add some events
 
 ## Tasks
 
-1. Add an allowance mapping field
+1. Add a Transfer Event to transfer and transferFrom functions
 
-2. Create an approve function which adds an allowance
+2. Add an Approve Event to approve function
 
-3. Create a transferFrom function which allows another party to transfer on behalf of you
-
-4. Write some unit tests for the above functions
+3. Create unit tests for these
 
